@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sorting Visualizer</title>
+    <style>
+        .bar { display: inline-block; width: 20px; margin-right: 2px; background: #3498db; vertical-align: bottom; }
+        #container { height: 300px; display: flex; align-items: flex-end; justify-content: center; padding: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Sorting Algorithm Visualizer</h1>
+    <button onclick="startVisualizer()">Start Bubble Sort</button>
+    <div id="container"></div>
+
+    <script>
+        let currentArray = [];
+
+        async function startVisualizer() {
+            // 1. Get random data from Flask
+            const res = await fetch('/generate');
+            currentArray = await res.json();
+            render(currentArray);
+
+            // 2. Get sorting steps from Flask
+            const sortRes = await fetch(`/bubble-sort/${currentArray.join(',')}`);
+            const steps = await sortRes.json();
+
+            // 3. Animate the steps
+            for (let step of steps) {
+                render(step);
+                await new Promise(r => setTimeout(r, 100)); // Delay for effect
+            }
+        }
+
+        function render(arr) {
+            const container = document.getElementById('container');
+            container.innerHTML = '';
+            arr.forEach(val => {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.style.height = `${val * 3}px`;
+                container.appendChild(bar);
+            });
+        }
+    </script>
+</body>
+</html>
