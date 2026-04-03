@@ -12,4 +12,4 @@ A Flask-based implementation to visualize the step-by-step execution of sorting 
 3. Visit `http://127.0.0.1:5000` in your browser.
 
 
-The aim here is to visualize sorting algorithms so as to make learning and understanding execution of various algorithms and their time complexities easier for students.
+The aim here is to visualize sorting algorithms(Bubble Sort, Quick Sort, Merge Sort) so as to make learning and understanding execution of various algorithms and their time complexities easier for students.
